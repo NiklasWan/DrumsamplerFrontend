@@ -1,0 +1,107 @@
+<ng-container *ngIf="viewState === 'libraryName'; else FileChooser">
+	<div fxLayout="row">
+		<h2 mat-dialog-title>Add new Library</h2>
+		<span class="spacer"></span>
+		<div style="padding-inline-start: 2em;">
+			<button mat-icon-button [mat-dialog-close]="true" aria-label="Close">
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+		
+	</div>
+	
+	<mat-dialog-content>
+		<form [formGroup]="libraryForm" (submit)="submitForm()">
+        
+			<mat-form-field class="col-5 mb-2 mx-auto" style="padding-bottom: 1em;">
+			  <mat-label>Library Name</mat-label>
+			  <input
+			    type="text"
+			    matInput
+			    formControlName="libName"
+			  />
+			  <mat-error *ngIf="libraryForm.get('libName')?.hasError('required')">
+				Password is <strong>required</strong>
+			      </mat-error>
+			</mat-form-field>
+			<br />
+			
+			<button
+			  [disabled]="!libraryForm.valid"
+			  mat-flat-button
+			  color="primary"
+			  class="col-3 mt-2 mb-3"
+			  type="submit"
+			>
+			  Add
+			</button>
+			<br />
+		      </form>
+	</mat-dialog-content>
+
+
+	
+</ng-container>
+<ng-template #FileChooser>
+	<ng-container *ngIf="viewState === 'fileChooser'; else UploadProgress">
+		<div fxLayout="row">
+			<h2 mat-dialog-title>Choose Sample Folder</h2>
+			<span class="spacer"></span>
+			<div style="padding-inline-start: 2em;">
+				<button mat-icon-button [mat-dialog-close]="true" aria-label="Close">
+					<mat-icon>close</mat-icon>
+				</button>
+			</div>
+		</div>
+		<input type="file" class="file-input" webkitdirectory directory (change)="onFilesSelected($event)" #fileChooser>
+		<button mat-raised-button color="primary" (click)="fileChooser.click()">Choose Folder</button>
+	</ng-container>
+</ng-template>
+<ng-template #UploadProgress>
+	<ng-container *ngIf="viewState === 'uploadProgress'; else AnalysisProgress">
+		<div fxLayout="row">
+			<h2 mat-dialog-title>Uploading</h2>
+			<span class="spacer"></span>
+			<button mat-icon-button [mat-dialog-close]="true" aria-label="Close">
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+
+		<mat-dialog-content>
+			<mat-spinner></mat-spinner>
+		</mat-dialog-content>
+	</ng-container>
+</ng-template>
+<ng-template #AnalysisProgress>
+	<ng-container *ngIf="viewState === 'analysisProgress'">
+		<div fxLayout="row">
+			<h2 mat-dialog-title>Analyzing</h2>
+			<span class="spacer"></span>
+			<div style="padding-inline-start: 2em;">
+				<button mat-icon-button [mat-dialog-close]="true" aria-label="Close">
+					<mat-icon>close</mat-icon>
+				</button>
+			</div>
+		</div>
+
+		<mat-dialog-content>
+			<mat-spinner></mat-spinner>
+		</mat-dialog-content>
+	</ng-container>
+</ng-template>
+
+
+<!-- <mat-dialog-content>
+	
+  <div *ngFor="let progress of progressInfos">
+	<h5> {{ progress.fileName }}</h5>
+	<mat-progress-bar mode="determinate" [value]="progress.value">
+
+	</mat-progress-bar>
+  </div>
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+</mat-dialog-actions> -->

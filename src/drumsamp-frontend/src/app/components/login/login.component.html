@@ -1,0 +1,54 @@
+<div class="login-container">
+	<mat-card style="margin-top: 4em; padding: 1 em;">
+    <mat-card-title>
+      <h1>Login</h1>
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (submit)="submitForm()">
+        
+        <mat-form-field class="col-5 mb-2 mx-auto" style="padding-bottom: 1em;">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+          />
+          <mat-error
+            *ngIf="
+            loginForm.get('email')?.hasError('email') &&
+              !loginForm.get('email')?.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <br />
+        
+        <mat-form-field class="col-5 mb-2 mx-auto" style="padding-bottom: 1em;">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" />
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <br />
+        <button
+          [disabled]="!loginForm.valid"
+          mat-flat-button
+          color="primary"
+          type="submit"
+          class="col-3 mt-2 mb-3"
+        >
+          Login
+        </button>
+        <br />
+      </form>
+    </mat-card-content>
+    <mat-card-footer style="padding: 1.5em;">
+      <a routerLink="/register" routerLinkActive="actove">Not registered?</a>
+    </mat-card-footer>
+  </mat-card>
+</div>

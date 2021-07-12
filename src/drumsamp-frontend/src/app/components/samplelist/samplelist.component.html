@@ -1,0 +1,21 @@
+<mat-action-list style="padding: 2em; margin-bottom: 4em;" appScrollable *ngIf="files.length > 0">
+	<mat-card style="margin-top: 1em;" mat-list-item *ngFor="let file of files" (click)="selectFile(file)">
+		<mat-card-title>
+			<div fxLayout="row" fxLayoutAlign="space-between none" >
+				<h4>{{ file.file.name }}</h4>
+				<div>
+					<mat-icon *ngIf="file.isFavorite; else outline_fav" (click)="onFavoriteClick(file)">star</mat-icon>
+					<ng-template #outline_fav>
+						<mat-icon (click)="onFavoriteClick(file)">star_outline</mat-icon>
+					</ng-template>
+				</div>
+			</div>
+		</mat-card-title>
+		<mat-card-content>
+			<mat-chip-list aria-label="Tags">
+				<mat-chip *ngFor="let tag of file.tags" disableRipple [removable]="true" selected [color]="getTagColor(tag)">{{ tag }}</mat-chip>
+			</mat-chip-list>
+		</mat-card-content>
+	</mat-card>
+
+</mat-action-list>

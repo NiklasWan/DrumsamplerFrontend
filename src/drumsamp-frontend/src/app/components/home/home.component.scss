@@ -1,0 +1,25 @@
+// .container {
+// 	display: flex;
+// 	flex: 1;
+// 	flex-direction: column;
+// }
+
+// .left-container {
+// 	flex: 1;
+// 	overflow: auto;
+// }
+
+// .right-container {
+// 	flex: 1;
+// 	flex-flow: column nowrap;
+// }
+
+.left-container {
+	height: 100vh;
+	overflow-y: scroll;
+}
+
+.right-bottom {
+	height: 100vh;
+	overflow-y: scroll;
+}

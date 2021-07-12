@@ -1,0 +1,54 @@
+<ng-container *ngIf="viewState === 'libView'; else FileChooser">
+	<div fxLayout="row">
+		<h2 mat-dialog-title>Select Library</h2>
+		<span class="spacer"></span>
+		<div style="padding-inline-start: 2em;">
+			<button mat-icon-button [mat-dialog-close]="true" aria-label="Close">
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+	</div>
+	<mat-dialog-content>
+		<mat-action-list style="padding: 2em;" appScrollable *ngIf="libs.length > 0">
+			<mat-card style="margin-top: 1em;" mat-list-item *ngFor="let lib of libs" (click)="onLibSelected(lib)">
+				<mat-card-title>
+					<h4>{{ lib }}</h4>
+				</mat-card-title>
+			</mat-card>
+		</mat-action-list>
+	</mat-dialog-content>
+</ng-container>
+
+<ng-template #FileChooser>
+	<ng-container *ngIf="viewState === 'fileChooser'; else FetchProgress">
+		<div fxLayout="row">
+			<h2 mat-dialog-title>Choose Sample Folder</h2>
+			<span class="spacer"></span>
+			<div style="padding-inline-start: 2em;">
+				<button mat-icon-button [mat-dialog-close]="true" aria-label="Close">
+					<mat-icon>close</mat-icon>
+				</button>
+			</div>
+		</div>
+
+		<input type="file" class="file-input" webkitdirectory directory (change)="onFilesSelected($event)" #fileChooser>
+		<button mat-raised-button color="primary" (click)="fileChooser.click()">Choose Folder</button>
+	</ng-container>
+</ng-template>
+<ng-template #FetchProgress>
+	<ng-container *ngIf="viewState === 'fetchProgress'">
+		<div fxLayout="row">
+			<h2 mat-dialog-title>Fetching Library Data</h2>
+			<span class="spacer"></span>
+			<div style="padding-inline-start: 2em;">
+				<button mat-icon-button [mat-dialog-close]="true" aria-label="Close">
+					<mat-icon>close</mat-icon>
+				</button>
+			</div>
+		</div>
+
+		<mat-dialog-content>
+			<mat-spinner></mat-spinner>
+		</mat-dialog-content>
+	</ng-container>
+</ng-template>

@@ -1,0 +1,1 @@
+export type UploadProgressModel = { value: number, fileName: string };

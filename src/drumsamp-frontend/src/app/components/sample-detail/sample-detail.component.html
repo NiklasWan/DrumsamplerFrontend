@@ -1,0 +1,57 @@
+<mat-card class="detail-container" style="margin-top: 2em; margin-inline: 2em;" [style.visibility]="(hideContainer) ? 'hidden' : 'visible'">
+	<div fxLayout="column" fxFlex="fxFill">
+		<mat-card-title>
+			<h2>{{ file?.file?.name }}</h2>
+		</mat-card-title>
+		<mat-card-content>
+			<div fxLayout="row" fxLayoutAlign=" center">
+				<div class="audio-play-button">
+					<button mat-fab color="primary" [disabled]="isDisabled" *ngIf="!isPlaying; else pause_button" (click)="startPlayback()">
+						<mat-icon>play_arrow</mat-icon>
+					</button>
+					<ng-template #pause_button>
+						<button mat-fab color="primary" (click)="pausePlayback()">
+							<mat-icon>pause</mat-icon>
+						</button>
+					</ng-template>
+				</div>
+				<div class="audio-stop-button">
+					<button  mat-fab color="primary" [disabled]="isDisabled" (click)="stopPlayback()">
+						<mat-icon>stop</mat-icon>
+					</button>
+				</div>
+				<div #waveform id="waveform" fxFlex="grow"></div>
+			</div>
+		</mat-card-content>
+		<mat-card-actions>
+			
+			<div fxLayout="row" fxLayoutAlign=" center" >
+				<mat-chip-list aria-label="Tags" style="padding-right: 1em;">
+					<mat-chip *ngFor="let tag of file?.tags" removable (removed)="removeTag(tag)" selected [color]="getTagColor(tag)">{{ tag }} <mat-icon matChipRemove>cancel</mat-icon></mat-chip>
+				</mat-chip-list>
+				<div *ngIf="file != undefined && file.tags.length < 2">
+					<button *ngIf="!isTagInputVisible; else InputForm"  mat-mini-fab (click)="toggleTagInput()" aria-label="Add Tag">
+						<mat-icon>edit</mat-icon>
+					</button>
+				</div>
+				
+			</div>
+			<ng-template #InputForm>
+				<div fxLayout="row" fxLayoutAlign=" center" style="padding-left: 2em;">
+					
+					<form #tagedit = "ngForm" (ngSubmit) = "onSubmit(tagedit)" fxLayout="row" fxLayoutAlign=" center" >
+						<mat-form-field appearance="fill" style="padding-right: 1em;">
+							<mat-label>Tagname</mat-label>
+							<input matInput name="tag" class="form-control"  type="text" required ngModel> 
+						</mat-form-field>
+						<button mat-mini-fab type="submit" value="submit" aria-label="Add Tag">
+							<mat-icon>add</mat-icon>
+						</button>
+					</form>
+					
+				</div>
+			</ng-template>
+		
+		</mat-card-actions>
+	</div>
+</mat-card>

@@ -1,0 +1,14 @@
+<div fxFlex="row" fxFlexFill>
+	<div class="left-container" fxFlex="1 1 30%">
+		
+		<app-samplelist [token]="token | async" [libName]="currentLibrary"></app-samplelist>
+	
+	</div>
+		
+	<div class="righ-bottom" fxFlex="1 1 70%">
+		<div fxFlex="column" fxFlexFill fxLayoutGap=20px>
+			<app-sample-detail [token]="token | async" [libName]="currentLibrary" fxFlexFill></app-sample-detail>
+			<app-sample-suggestions [token]="token | async" [libName]="currentLibrary" fxFlexFill></app-sample-suggestions>
+		</div>
+	</div>
+</div>

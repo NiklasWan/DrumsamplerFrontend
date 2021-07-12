@@ -1,0 +1,40 @@
+<div fxLayout="column" style="height: 100vh;">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Drumsampler</span>
+      <span class="spacer"></span>
+      <button *ngIf="isUserLoggedIn" mat-icon-button [matMenuTriggerFor]="settingsmenu" aria-label="Settings">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-menu #settingsmenu="matMenu">
+    <div *ngIf="isUserLoggedIn">
+
+      <button mat-menu-item (click)="openDialog()">
+        <mat-icon>drive_folder_upload</mat-icon>
+        <span>Import New Library</span>
+      </button>
+      <button mat-menu-item (click)="openLibrary()">
+        <mat-icon>folder_open</mat-icon>
+        <span>Open Library</span>
+      </button>
+      <button mat-menu-item (click)="getCustomTags()">
+        <mat-icon>label</mat-icon>
+        <span>Get custom tags</span>
+      </button>
+      <button mat-menu-item (click)="getRecommendations()">
+        <mat-icon>stars</mat-icon>
+        <span>Get recommendations</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+
+    </div>
+  </mat-menu>
+  <div fxFlexFill>
+    <router-outlet fxFlexFill></router-outlet>
+  </div>
+</div>
