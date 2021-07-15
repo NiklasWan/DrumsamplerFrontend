@@ -9,4 +9,4 @@ To start the application following steps need to be taken:
 - Clone the project
 - Run the following command to start the app: `cd src/drumsamp-frontend && ng serve`
 
-Further information on the project can be found [here](TODO)
+Further information on the project can be found [here](https://creative-technologies.de/implementation-of-a-distributed-ai-driven-audio-sample-manager).
